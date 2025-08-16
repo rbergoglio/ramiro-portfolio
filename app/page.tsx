@@ -1,3 +1,5 @@
+// ===== app/page.tsx (Home with brand styling) =====
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/Section";
@@ -12,39 +14,79 @@ export default function HomePage() {
           <div className="space-y-6">
             <div>
               <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-                Full‑stack developer building <span className="underline decoration-zinc-300 underline-offset-4 dark:decoration-zinc-700">fast, secure</span> web apps
+                Hello there! I'm{" "}
+                <span className="underline decoration-[hsl(var(--brand)/0.55)] underline-offset-4">
+                  Rami!
+                </span>{" "}
+                Nice to meet you.
               </h1>
               <p className="mt-4 max-w-prose text-zinc-600 dark:text-zinc-400">
-                I design, develop, and deploy end‑to‑end solutions — from React frontends to Python/Node backends and automated infra. Currently in Buenos Aires.
+                I design, develop, and deploy end-to-end solutions — from
+                React frontends to Python/Node backends and automated infra.
+                Currently in Buenos Aires.
               </p>
             </div>
+
             <div className="flex flex-wrap gap-3">
-              <Button asChild>
+              <Button
+                asChild
+                className="bg-[hsl(var(--brand))] hover:bg-[hsl(var(--brand)/0.9)] text-white"
+              >
                 <Link href="/projects">
                   See projects <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button asChild variant="secondary">
+
+              <Button
+                asChild
+                variant="secondary"
+                className="bg-[hsl(var(--brand)/0.08)] hover:bg-[hsl(var(--brand)/0.12)]"
+              >
                 <Link href="/contact">Contact me</Link>
               </Button>
-              <Button asChild variant="outline">
-                <a href="https://github.com/youruser" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2">
+
+              <Button
+                asChild
+                variant="outline"
+                className="border-[hsl(var(--brand)/0.3)] hover:bg-[hsl(var(--brand)/0.06)]"
+              >
+                <a
+                  href="https://github.com/youruser"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2"
+                >
                   <Github className="h-4 w-4" /> GitHub
                 </a>
               </Button>
-              <Button asChild variant="outline">
-                <a href="https://linkedin.com/in/youruser" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2">
+
+              <Button
+                asChild
+                variant="outline"
+                className="border-[hsl(var(--brand)/0.3)] hover:bg-[hsl(var(--brand)/0.06)]"
+              >
+                <a
+                  href="https://linkedin.com/in/youruser"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2"
+                >
                   <Linkedin className="h-4 w-4" /> LinkedIn
                 </a>
               </Button>
             </div>
           </div>
+
           <div className="order-first md:order-last">
-            <div className="aspect-[4/3] w-full rounded-2xl border border-zinc-200 bg-gradient-to-br from-zinc-50 to-white p-4 shadow-sm dark:border-zinc-800 dark:from-zinc-900 dark:to-zinc-950">
-              {/* Placeholder for a hero image or code preview */}
-              <div className="flex h-full items-center justify-center text-zinc-400 dark:text-zinc-600">
-                Add your image or a code screenshot here
-              </div>
+            <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl border border-zinc-200 shadow-sm ring-1 ring-[hsl(var(--brand)/0.14)] dark:border-zinc-800">
+              <Image
+                src="/ramiro.jpeg"
+                alt="Ramiro Bergoglio"
+                width={800}
+                height={600}
+                className="h-full w-full object-cover"
+                priority
+              />
             </div>
           </div>
         </div>
@@ -53,34 +95,47 @@ export default function HomePage() {
       {/* Featured project teaser */}
       <Section title="Featured project" subtitle="Case study">
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-2xl border border-zinc-200 p-6 shadow-sm dark:border-zinc-800">
-            <h3 className="text-lg font-semibold tracking-tight">Deployment automation for XYZ</h3>
+          <div className="card">
+            <h3 className="text-lg font-semibold tracking-tight">
+              Deployment automation for XYZ
+            </h3>
             <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-              Reduced deploy time by 40% by building IaC with Ansible & PowerCLI, adding CI/CD and health checks.
+              Reduced deploy time by 40% by building IaC with Ansible &
+              PowerCLI, adding CI/CD and health checks.
             </p>
             <div className="mt-4 flex gap-3 text-xs text-zinc-500">
-              <span className="rounded-full bg-zinc-100 px-2 py-1 dark:bg-zinc-900">React</span>
-              <span className="rounded-full bg-zinc-100 px-2 py-1 dark:bg-zinc-900">FastAPI</span>
-              <span className="rounded-full bg-zinc-100 px-2 py-1 dark:bg-zinc-900">Ansible</span>
+              <span className="rounded-full bg-[hsl(var(--brand)/0.12)] px-2 py-1">React</span>
+              <span className="rounded-full bg-[hsl(var(--brand)/0.12)] px-2 py-1">FastAPI</span>
+              <span className="rounded-full bg-[hsl(var(--brand)/0.12)] px-2 py-1">Ansible</span>
             </div>
             <div className="mt-5">
-              <Link href="/projects" className="text-sm font-medium underline underline-offset-4">
+              <Link
+                href="/projects"
+                className="text-sm font-medium underline decoration-[hsl(var(--brand)/0.6)] underline-offset-4"
+              >
                 Read more →
               </Link>
             </div>
           </div>
-          <div className="rounded-2xl border border-zinc-200 p-6 shadow-sm dark:border-zinc-800">
-            <h3 className="text-lg font-semibold tracking-tight">Recipe app (members & visitors)</h3>
+
+          <div className="card">
+            <h3 className="text-lg font-semibold tracking-tight">
+              Recipe app (members & visitors)
+            </h3>
             <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-              Mobile-first app with search/filters, Supabase auth, and content moderation workflow.
+              Mobile-first app with search/filters, Supabase auth, and content
+              moderation workflow.
             </p>
             <div className="mt-4 flex gap-3 text-xs text-zinc-500">
-              <span className="rounded-full bg-zinc-100 px-2 py-1 dark:bg-zinc-900">React Native</span>
-              <span className="rounded-full bg-zinc-100 px-2 py-1 dark:bg-zinc-900">Supabase</span>
-              <span className="rounded-full bg-zinc-100 px-2 py-1 dark:bg-zinc-900">Expo Router</span>
+              <span className="rounded-full bg-[hsl(var(--brand)/0.12)] px-2 py-1">React Native</span>
+              <span className="rounded-full bg-[hsl(var(--brand)/0.12)] px-2 py-1">Supabase</span>
+              <span className="rounded-full bg-[hsl(var(--brand)/0.12)] px-2 py-1">Expo Router</span>
             </div>
             <div className="mt-5">
-              <Link href="/projects" className="text-sm font-medium underline underline-offset-4">
+              <Link
+                href="/projects"
+                className="text-sm font-medium underline decoration-[hsl(var(--brand)/0.6)] underline-offset-4"
+              >
                 Read more →
               </Link>
             </div>
@@ -90,13 +145,19 @@ export default function HomePage() {
 
       {/* CTA */}
       <Section className="py-20">
-        <div className="rounded-2xl border border-zinc-200 p-8 text-center shadow-sm dark:border-zinc-800">
-          <h3 className="text-2xl font-semibold tracking-tight">Open to interesting opportunities</h3>
+        <div className="rounded-2xl border border-zinc-200 p-8 text-center shadow-sm dark:border-zinc-800 bg-[linear-gradient(135deg,hsl(var(--brand))_0%,hsl(var(--brand)/.75)_100%)]/10">
+          <h3 className="text-2xl font-semibold tracking-tight">
+            Open to interesting opportunities
+          </h3>
           <p className="mx-auto mt-2 max-w-prose text-zinc-600 dark:text-zinc-400">
-            I like tough problems and measurable impact. If you have a project in mind, let’s talk.
+            I like tough problems and measurable impact. If you have a project
+            in mind, let’s talk.
           </p>
           <div className="mt-5 flex justify-center">
-            <Button asChild>
+            <Button
+              asChild
+              className="bg-[hsl(var(--brand))] hover:bg-[hsl(var(--brand)/0.9)] text-white"
+            >
               <Link href="/contact">Get in touch</Link>
             </Button>
           </div>
