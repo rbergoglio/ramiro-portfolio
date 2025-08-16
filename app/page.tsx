@@ -14,7 +14,7 @@ export default function HomePage() {
           <div className="space-y-6">
             <div>
               <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-                Hello there! I'm{" "}
+                Hello there! I&apos;m{" "}
                 <span className="underline decoration-[hsl(var(--brand)/0.55)] underline-offset-4">
                   Rami!
                 </span>{" "}
@@ -151,7 +151,7 @@ export default function HomePage() {
           </h3>
           <p className="mx-auto mt-2 max-w-prose text-zinc-600 dark:text-zinc-400">
             I like tough problems and measurable impact. If you have a project
-            in mind, let’s talk.
+            in mind, let&apos;s talk.
           </p>
           <div className="mt-5 flex justify-center">
             <Button

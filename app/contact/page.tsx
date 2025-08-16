@@ -21,6 +21,7 @@ export default function ContactPage() {
       setForm({ name: "", email: "", message: "" });
     } catch (e) {
       setStatus("error");
+      console.error("Contact form submission error:", e);
     }
   }
 
