@@ -11,13 +11,11 @@ export function AppFooter() {
           <Link className="hover:underline" href="/privacy">
             Privacy
           </Link>
-          <Link className="hover:underline" href="/uses">
-            Uses
-          </Link>
-          <a className="hover:underline" href="https://github.com/" target="_blank" rel="noreferrer">
+
+          <a className="hover:underline" href="https://github.com/rbergoglio" target="_blank" rel="noreferrer">
             GitHub
           </a>
-          <a className="hover:underline" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">
+          <a className="hover:underline" href="https://www.linkedin.com/in/rbergoglio/" target="_blank" rel="noreferrer">
             LinkedIn
           </a>
         </div>

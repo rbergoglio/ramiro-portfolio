@@ -4,6 +4,28 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/Section";
 import { ArrowRight, Github, Linkedin } from "lucide-react";
+import { ProjectCard, type Project } from "@/components/ProjectCard";
+
+const projects: Project[] = [
+  {
+    title: "Deployment automation for XYZ",
+    description: "Reduced deploy time by 40% with IaC (Ansible, PowerCLI) and CI/CD checks.",
+    tech: ["React", "FastAPI", "Ansible", "PowerCLI"],
+    href: "/projects/xyz-automation",
+    repo: "https://github.com/youruser/xyz-automation",
+  },
+  {
+    title: "Recipe app (members & visitors)",
+    description: "Search/filters, Supabase auth, moderation workflow. Mobile-first.",
+    tech: ["React Native", "Expo Router", "Supabase"],
+    repo: "https://github.com/youruser/recipe-app",
+  },
+  {
+    title: "SDP/Zero Trust tooling",
+    description: "Automation scripts and dashboards for Software Defined Perimeter operations.",
+    tech: ["PowerShell", "Python", "VMware"],
+  },
+];
 
 export default function HomePage() {
   return (
@@ -15,7 +37,7 @@ export default function HomePage() {
             <div>
               <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
                 Hello there! I&apos;m{" "}
-                <span className="underline decoration-[hsl(var(--brand)/0.55)] underline-offset-4">
+                <span className="bg-gradient-to-r from-[hsl(var(--brand))] to-orange-600 bg-clip-text text-transparent">
                   Rami!
                 </span>{" "}
                 Nice to meet you.
@@ -51,7 +73,7 @@ export default function HomePage() {
                 className="border-[hsl(var(--brand)/0.3)] hover:bg-[hsl(var(--brand)/0.06)]"
               >
                 <a
-                  href="https://github.com/youruser"
+                  href="https://github.com/rbergoglio"
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-2"
@@ -66,7 +88,7 @@ export default function HomePage() {
                 className="border-[hsl(var(--brand)/0.3)] hover:bg-[hsl(var(--brand)/0.06)]"
               >
                 <a
-                  href="https://linkedin.com/in/youruser"
+                  href="https://www.linkedin.com/in/rbergoglio/"
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center gap-2"
@@ -95,51 +117,9 @@ export default function HomePage() {
       {/* Featured project teaser */}
       <Section title="Featured project" subtitle="Case study">
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="card">
-            <h3 className="text-lg font-semibold tracking-tight">
-              Deployment automation for XYZ
-            </h3>
-            <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-              Reduced deploy time by 40% by building IaC with Ansible &
-              PowerCLI, adding CI/CD and health checks.
-            </p>
-            <div className="mt-4 flex gap-3 text-xs text-zinc-500">
-              <span className="rounded-full bg-[hsl(var(--brand)/0.12)] px-2 py-1">React</span>
-              <span className="rounded-full bg-[hsl(var(--brand)/0.12)] px-2 py-1">FastAPI</span>
-              <span className="rounded-full bg-[hsl(var(--brand)/0.12)] px-2 py-1">Ansible</span>
-            </div>
-            <div className="mt-5">
-              <Link
-                href="/projects"
-                className="text-sm font-medium underline decoration-[hsl(var(--brand)/0.6)] underline-offset-4"
-              >
-                Read more →
-              </Link>
-            </div>
-          </div>
-
-          <div className="card">
-            <h3 className="text-lg font-semibold tracking-tight">
-              Recipe app (members & visitors)
-            </h3>
-            <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
-              Mobile-first app with search/filters, Supabase auth, and content
-              moderation workflow.
-            </p>
-            <div className="mt-4 flex gap-3 text-xs text-zinc-500">
-              <span className="rounded-full bg-[hsl(var(--brand)/0.12)] px-2 py-1">React Native</span>
-              <span className="rounded-full bg-[hsl(var(--brand)/0.12)] px-2 py-1">Supabase</span>
-              <span className="rounded-full bg-[hsl(var(--brand)/0.12)] px-2 py-1">Expo Router</span>
-            </div>
-            <div className="mt-5">
-              <Link
-                href="/projects"
-                className="text-sm font-medium underline decoration-[hsl(var(--brand)/0.6)] underline-offset-4"
-              >
-                Read more →
-              </Link>
-            </div>
-          </div>
+          <ProjectCard key={projects[0].title} project={projects[0]} />
+          {/* Manually coded teaser for second project with custom link */}
+          <ProjectCard key={projects[1].title} project={projects[1]} />
         </div>
       </Section>
 

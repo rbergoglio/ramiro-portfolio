@@ -10,18 +10,31 @@ export default function ExperiencePage() {
           company="ExxonMobil"
           dates="2023 — Present"
           bullets={[
-            "Designed and maintained SDPs; automated VM lifecycle with Ansible/PowerCLI.",
-            "Built internal tools with React, FastAPI, and Python to reduce manual ops.",
-            "Improved platform reliability and team productivity through CI and scripting.",
+            "Software development for 3 applications that automate the creation of advanced firewall rules called Entitlements.",
+            "Technologies used: React, FastAPI, Flask, PowerShell, SQL.",
+            "CI/CD with Azure Pipelines and GitHub Actions.",
+            "Citizen developer in ServiceNow.",
+            "Datadog for observability.",
           ]}
         />
         <TimelineItem
-          role="Developer & Research Assistant"
-          company="UADE"
-          dates="2021 — 2023"
+          role="Internet Hosting Analyst"
+          company="ExxonMobil"
+          dates="2020 — 2023"
           bullets={[
-            "Participated in a biotechnology research project; supported data pipelines.",
-            "Co‑organized Global Game Jam events and shipped small Unity prototypes.",
+            "Design, maintenance, and upgrades for SDP virtual machines (Software Defined Perimeter).",
+            "SDP is a security platform which replaces traditional VPNs and applies Zero Trust, providing increased cyber security.",
+            "Used automation tools like Ansible, PowerShell, and Python to increase productivity.",
+            "Automated deployment of appliances and backups using Ansible.",
+          ]}
+        />
+        <TimelineItem
+          role="Administrative"
+          company="Vivatia"
+          dates="2016 — 2019"
+          bullets={[
+            "Worked for client GalenoART, handling all tasks related to transforming physical documents into digital documents.",
+            "Responsibilities included scanning, editing, and publishing documents to an internal database.",
           ]}
         />
       </div>
