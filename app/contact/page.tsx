@@ -66,7 +66,7 @@ export default function ContactPage() {
             {status === "sending" ? "Sending…" : "Send message"}
           </Button>
           {status === "sent" && (
-            <span className="text-sm text-green-600 dark:text-red-400">Woops! I haven't implemented the contact page yet. Check out my linkedin for contacting me!</span>
+            <span className="text-sm text-green-600 dark:text-red-400">Woops! I haven&#39;t implemented the contact page yet. Check out my linkedin for contacting me!</span>
           )}
           {status === "error" && (
             <span className="text-sm text-red-600 dark:text-red-400">Something went wrong. Try again.</span>
