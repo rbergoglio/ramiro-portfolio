@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ramiro Bergoglio – Portfolio Website
+
+This is my personal portfolio website built with **Next.js**, deployed on **Vercel**, and styled with **Tailwind CSS** and **shadcn/ui**.  
+The site showcases my work as a **Fullstack Developer** and includes pages for my projects, blog, and a contact form.
+
+---
+
+## Tech Stack
+
+- **[Next.js 14](https://nextjs.org/)** – React framework with App Router  
+- **TypeScript** – type safety  
+- **[Tailwind CSS](https://tailwindcss.com/)** – utility-first CSS  
+- **[shadcn/ui](https://ui.shadcn.com/)** – accessible component library  
+- **Lucide Icons** – modern SVG icon set  
+- **Resend** – transactional email service (for the contact form)  
+- **Vercel** – hosting & deployment  
+- **Cloudflare Domains** – custom domain + DNS  
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### 1. Install dependencies
+
+I'm using Node v22.14.0.
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Run dev server
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Visit http://localhost:3000.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Type-check & Lint
 
-## Learn More
+```bash
+npm run typecheck   # Run TypeScript checks
+npm run lint        # Run ESLint
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 4. Build & Preview Production
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run build
+npm run start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Contact Form
 
-## Deploy on Vercel
+The contact form uses Resend to deliver messages.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Create a domain and verify it with Resend
+2. Add your Resend API key in Vercel Environment Variables:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```ini
+RESEND_API_KEY=your_api_key_here
+```
+3. The backend route is defined at app/api/contact/route.ts.
+
+## Deployment
+
+This project is deployed on Vercel.
+Steps:
+
+1. Push to GitHub
+2. Connect repo to Vercel
+3. Add custom domain (via Cloudflare)
+4. Set environment variables in the Vercel dashboard
+
+## Domain
+
+I bought a domain from cloudfare and configured the DNS records to point to the Vercel suggested config.
