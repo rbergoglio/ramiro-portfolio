@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { AppHeader } from "@/components/AppHeader";
 import { AppFooter } from "@/components/AppFooter";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { ScrollProgress } from "@/components/ScrollProgress";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,6 +38,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="flex min-h-dvh flex-col">
             <AppHeader />
+            <ScrollProgress />
             <main className="flex-1">{children}</main>
             <AppFooter />
           </div>

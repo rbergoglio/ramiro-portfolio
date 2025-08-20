@@ -1,10 +1,12 @@
-// ===== app/page.tsx (Home with brand styling) =====
+// ===== app/page.tsx (Home with brand styling, improved CSS) =====
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/Section";
 import { ArrowRight, Github, Linkedin } from "lucide-react";
 import { ProjectCard, type Project } from "@/components/ProjectCard";
+import { Reveal } from "@/components/Reveal";
+import { TiltCard } from "@/components/TiltCard";
 
 const projects: Project[] = [
   {
@@ -26,20 +28,22 @@ export default function HomePage() {
     <>
       {/* Hero */}
       <Section className="py-24">
-        <div className="grid items-center gap-8 md:grid-cols-2">
+        <div className="grid items-center gap-12 md:grid-cols-2">
           <div className="space-y-6">
             <div>
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-                Hello there! I&apos;m{" "}
-                <span className="bg-gradient-to-r from-[hsl(var(--brand))] to-orange-600 bg-clip-text text-transparent">
-                  Rami!
-                </span>{" "}
-                Nice to meet you.
-              </h1>
+              <Reveal>
+                <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+                  Hello there! I&apos;m{" "}
+                  <span className="bg-gradient-to-r from-[hsl(var(--brand))] to-orange-600 bg-clip-text text-transparent animate-gradient">
+                    Rami!
+                  </span>{" "}
+                  Nice to meet you.
+                </h1>
+              </Reveal>
               <p className="mt-4 max-w-prose text-zinc-600 dark:text-zinc-400">
-                I design, develop, and deploy end-to-end solutions — from
-                React frontends to Python/Node backends and automated infra.
-                Currently in Buenos Aires.
+                I design, develop, and deploy end-to-end solutions — from React
+                frontends to Python/Node backends and automated infra. Currently
+                in Buenos Aires.
               </p>
             </div>
 
@@ -109,11 +113,14 @@ export default function HomePage() {
       </Section>
 
       {/* Featured project teaser */}
-      <Section title="Featured project" subtitle="Case study">
+      <Section title="Featured projects" subtitle="Case study">
         <div className="grid gap-6 md:grid-cols-2">
-          <ProjectCard key={projects[0].title} project={projects[0]} />
-          {/* Manually coded teaser for second project with custom link */}
-          <ProjectCard key={projects[1].title} project={projects[1]} />
+          <Reveal delay={0.2}>
+            <ProjectCard key={projects[0].title} project={projects[0]} />
+          </Reveal>
+          <Reveal delay={0.2}>
+            <ProjectCard key={projects[1].title} project={projects[1]} />
+          </Reveal>
         </div>
       </Section>
 
