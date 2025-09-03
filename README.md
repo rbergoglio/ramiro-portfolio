@@ -56,6 +56,8 @@ The contact form uses Resend to deliver messages.
 
 ```ini
 RESEND_API_KEY=your_api_key_here
+CONCTACT_FROM = email@ramidomain.com
+CONTACT_TO = mypersonalemail@domain.com
 ```
 3. The backend route is defined at app/api/contact/route.ts.
 

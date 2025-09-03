@@ -7,6 +7,8 @@ import { ArrowRight, Github, Linkedin } from "lucide-react";
 import { ProjectCard, type Project } from "@/components/ProjectCard";
 import { Reveal } from "@/components/Reveal";
 import { TiltCard } from "@/components/TiltCard";
+import { AnimatedBlob } from "@/components/AnimatedBlob";
+import { ObeliskOrbit } from "@/components/ObeliskOrbit";
 
 const projects: Project[] = [
   {
@@ -97,17 +99,19 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="order-first md:order-last">
-            <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl border border-zinc-200 shadow-sm ring-1 ring-[hsl(var(--brand)/0.14)] dark:border-zinc-800">
-              <Image
+					<div className="order-first md:order-last flex justify-center md:justify-end">
+              {/* <Image
                 src="/ramiro.jpeg"
                 alt="Ramiro Bergoglio"
                 width={800}
                 height={600}
                 className="h-full w-full object-cover"
                 priority
-              />
-            </div>
+              /> */}
+              <TiltCard>
+								{/* <AnimatedBlob /> */}
+								<ObeliskOrbit speed={1.5} />
+							</TiltCard>
           </div>
         </div>
       </Section>
