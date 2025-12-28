@@ -100,18 +100,14 @@ export default function HomePage() {
           </div>
 
 					<div className="order-first md:order-last flex justify-center md:justify-end">
-              {/* <Image
-                src="/ramiro.jpeg"
+              <Image
+                src="/ramiro.png"
                 alt="Ramiro Bergoglio"
                 width={800}
                 height={600}
                 className="h-full w-full object-cover"
                 priority
-              /> */}
-              <TiltCard>
-								{/* <AnimatedBlob /> */}
-								<ObeliskOrbit speed={1.5} />
-							</TiltCard>
+              />
           </div>
         </div>
       </Section>

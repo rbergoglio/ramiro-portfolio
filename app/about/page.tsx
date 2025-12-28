@@ -4,23 +4,19 @@ import { Section } from "@/components/Section";
 export default function AboutPage() {
   return (
     <Section title="About" subtitle="Who I am">
-      <div className="grid items-start gap-8 md:grid-cols-[220px,1fr]">
-        <div className="overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800">
-          <Image src="/avatar.jpg" alt="Ramiro Bergoglio" width={600} height={600} className="h-auto w-full" />
+      <div className="grid items-start gap-8 md:grid-cols-[220px_1fr]">
+        <div className="overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800 w-full md:w-[220px]">
+          <Image src="/ramiro.jpeg" alt="Ramiro Bergoglio" width={300} height={300} className="object-cover w-full h-[220px] md:h-full" />
         </div>
-        <div className="space-y-4 text-zinc-700 dark:text-zinc-300">
+        <div className="space-y-4 text-zinc-700 dark:text-zinc-300 text-left">
           <p>
-            I’m Ramiro, a full‑stack developer based in Buenos Aires. I build pragmatic
-            solutions end‑to‑end: React frontends, Python/Node backends, and automated
-            infrastructure on VMware and cloud.
+            I am a Software Engineer with over six years of experience designing and building scalable, secure, and reliable applications in enterprise environments. I currently work at ExxonMobil as a Full Stack Developer, where I develop internal applications that automate critical security and networking processes, with a strong focus on Python-based backends and modern frontend frameworks.
           </p>
           <p>
-            Recently, I’ve focused on Software Defined Perimeter (SDP), scripting with
-            Ansible, PowerShell and Python to boost productivity and reliability.
+            I enjoy exploring software engineering topics in depth and writing about how I approach problems. The goal of this site is to use it as a space to document ideas, coding challenges, and concepts I’m learning. It's a work in progress!
           </p>
-          <p className="text-sm">
-            Tools I use a lot: React, TypeScript, Tailwind, FastAPI/Flask, Node, SQL,
-            Ansible, PowerShell, VMware/PowerCLI, GitHub Actions.
+          <p>
+            
           </p>
         </div>
       </div>
