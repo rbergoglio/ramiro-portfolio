@@ -6,9 +6,7 @@ import { Section } from "@/components/Section";
 import { ArrowRight, Github, Linkedin } from "lucide-react";
 import { ProjectCard, type Project } from "@/components/ProjectCard";
 import { Reveal } from "@/components/Reveal";
-import { TiltCard } from "@/components/TiltCard";
-import { AnimatedBlob } from "@/components/AnimatedBlob";
-import { ObeliskOrbit } from "@/components/ObeliskOrbit";
+
 
 const projects: Project[] = [
   {

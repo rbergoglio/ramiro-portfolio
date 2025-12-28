@@ -13,7 +13,7 @@ export default function AboutPage() {
             I am a Software Engineer with over six years of experience designing and building scalable, secure, and reliable applications in enterprise environments. I currently work at ExxonMobil as a Full Stack Developer, where I develop internal applications that automate critical security and networking processes, with a strong focus on Python-based backends and modern frontend frameworks.
           </p>
           <p>
-            I enjoy exploring software engineering topics in depth and writing about how I approach problems. The goal of this site is to use it as a space to document ideas, coding challenges, and concepts I’m learning. It's a work in progress!
+            I enjoy exploring software engineering topics in depth and writing about how I approach problems. The goal of this site is to use it as a space to document ideas, coding challenges, and concepts I&apos;m learning. It&apos;s a work in progress!
           </p>
           <p>
             

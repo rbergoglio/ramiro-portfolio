@@ -1,6 +1,5 @@
 import { Section } from "@/components/Section";
 import { ProjectCard, type Project } from "@/components/ProjectCard";
-import { Reveal } from "@/components/Reveal";
 
 const projects: Project[] = [
   {
