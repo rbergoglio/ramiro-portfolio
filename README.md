@@ -7,7 +7,7 @@ The site showcases my work as a **Fullstack Developer** and includes pages for m
 
 ## Tech Stack
 
-- **[Next.js 14](https://nextjs.org/)** – React framework with App Router  
+- **[Next.js 16](https://nextjs.org/)** – React framework with App Router  
 - **TypeScript** – type safety  
 - **[Tailwind CSS](https://tailwindcss.com/)** – utility-first CSS  
 - **[shadcn/ui](https://ui.shadcn.com/)** – accessible component library  

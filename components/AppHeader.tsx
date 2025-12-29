@@ -12,6 +12,7 @@ export const nav = [
   { href: "/experience", label: "Experience" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
+  // { href: "/blog", label: "Blog" },
 ];
 
 export function AppHeader() {
