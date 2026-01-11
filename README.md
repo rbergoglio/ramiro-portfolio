@@ -74,3 +74,49 @@ Steps:
 ## Domain
 
 I bought a domain from cloudfare and configured the DNS records to point to the Vercel suggested config.
+
+## Blog con MDX
+
+### Stack
+- **MDX**: Permite escribir Markdown con componentes React embebidos
+- **gray-matter**: Lee y parsea el frontmatter (metadata entre `---`) de archivos MDX
+- **next-mdx-remote**: Renderiza el contenido MDX como componentes React
+
+### Cómo funciona
+1. Los posts se guardan en `/content/posts/` como archivos `.mdx`
+2. Cada post tiene metadata (frontmatter) al inicio:
+```mdx
+   ---
+   title: "Mi Post"
+   date: "2025-12-29"
+   tags: ["react"]
+   ---
+```
+3. `/lib/posts.ts` usa `gray-matter` para leer archivos y extraer metadata
+4. `/app/blog/[slug]/page.tsx` usa `next-mdx-remote` para renderizar el contenido
+5. Un solo template dinámico maneja todos los posts automáticamente
+
+### Ventaja
+Escribir posts = crear archivos `.mdx` simples. No código, solo contenido.
+
+### Agregar un Nuevo Post
+
+1. Crear archivo en `/content/posts/mi-nuevo-post.mdx`
+2. Agregar frontmatter:
+```mdx
+   ---
+   title: "Título del Post"
+   description: "Descripción corta"
+   date: "2024-12-29"
+   tags: ["tag1", "tag2"]
+   img: "/images/mi-post.jpg"
+   ---
+```
+3. Escribir contenido en Markdown
+4. Opcional: usar componentes React con `<MiComponente />`
+
+El post aparecerá automáticamente en `/blog` sin tocar código.
+
+## TODO
+
+1. SEO

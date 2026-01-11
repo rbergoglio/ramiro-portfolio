@@ -1,0 +1,267 @@
+---
+title: "The squared sum problem"
+description: "Solving a classic math problem with Python."
+date: "2025-12-29"
+tags: ["Python","Math"]
+img: "/images/nextjs-api.jpg"
+---
+
+# The squared sum problem
+
+I finally finished collage. Now I want to be a nerd! The first thing I did was buy a book called "Things to Make and Do in the Fourth Dimension" and on one chapter
+one thing they talked about was the squared sum problem. It's a classic problem that goes like this:
+
+Arrange the numbers 1 to 16 so that the sum of the squares of any two adjacent numbers is a perfect square.
+
+So for example: 
+```
+3 1 8 
+```
+Is a valid sequence because 3+1=4 and 1+8=9, both perfect squares.
+
+It's something that can be solved with pen and paper, but I am a programmer, so I decided to solve it with Python. In this blog post I'll talk about how I resolved it.
+
+## First steps
+
+I actually started first with pen and paper. My first thought was that the highest numbers would have the least amount of possible adyacents so I started with them.
+
+```
+10 15 1 ...
+
+10 15 1 3 ...
+
+10 15 1 8 ...
+```
+
+I tried a few combinations but I quickly realized that this was going to be tedious. And what I was doing was similar to backtracking, so I decided to write a program to do it for me.
+I know it's not the best solution, but my goal was to find one solution first without AI or help and then optimize it later or find a better one.
+
+## Let's backtrack
+
+So what I was doing with pen and paper was basically backtracking. In backtracking, the algorithm tries something and if it fails it goes back to the previous step and tries something else.
+It's a brute force approach.
+
+A basic backtracking algorithm has this shape:
+
+```python
+options = ["option1","option2","option3"]
+solution = []
+def backtrack(solution):
+    if is_solution(solution):
+        return solution
+    for option in options:
+        if is_valid(option, solution):
+            solution.add(option)
+            result = backtrack(solution)
+            if result is not None:
+                return result
+            solution.remove(option)
+    return None
+```
+
+What that says is:
+1. If the current solution is valid, return it.
+2. If not, let's try all the options. For each option I'll check if there's a valid solution.
+3. If I find one solution, for example two adyacents numbers that sum a perfect square, then I keep trying with that solution and remove the numbers.
+4. If I don't find a valid solution then I'll stop there and backtrack to a valid solution to continue with the rest of possible solutions.
+
+Honestly it's a little confusing at first but once it clicks it's easy.
+
+## The code
+
+
+```python
+
+import math
+    
+def is_squared_list(list_of_numbers: list[int]) -> bool:
+    for index in range(len(list_of_numbers) - 1):
+        # If the root of the sums of each pair of adyacent numbers is an integer (resto 0)
+        # then it's a squared list
+        if(math.sqrt(list_of_numbers[index] + list_of_numbers[index+1]) % 1 != 0):
+            return False
+    return True
+
+
+def findSquaredList(squaredList: list[int], sixteenNumbers: list[int]) -> list[int] | None:
+    if len(sixteenNumbers) == 0:
+        return squaredList if is_squared_list(squaredList) else None
+    else:
+        for index, item in enumerate(sixteenNumbers):
+            newlist= squaredList + [item]
+            if(is_squared_list(squaredList)):
+                newSixteenNumbers = sixteenNumbers[:index] + sixteenNumbers[index+1:]
+                result = findSquaredList(newlist, newSixteenNumbers)
+                if result is not None:
+                    return result
+        return None
+
+sixteenNumbers = [i for i in range(1,17)]
+print(findSquaredList([],sixteenNumbers))
+
+```
+
+And Ta daaaa I got the only possible solution:
+
+[8, 1, 15, 10, 6, 3, 13, 12, 4, 5, 11, 14, 2, 7, 9, 16]
+
+Backtracking is known to have a really bad algorithm complexity. Let's analyze it and look for better solutions. Now with google and AI allowed :D
+
+### Algorithm complexity
+
+This problem proposes to find a solution for the numbers of 1 - 16 but there it's possible to find a list for n numbers! (while n > 24)
+
+Let's do a little experiment. I'll add a decorator to my function to measure the time and then I'll see how long it takes each time.
+
+16 numbers: 0.02 seconds
+25 numbers: 0.10 seconds
+30 numbers: 1.2 seconds
+35 numbers: 2,4 seconds
+40 numbers: 31 seconds
+
+```
+[1, 3, 6, 10, 39, 25, 24, 40, 9, 16, 33, 31, 18, 7, 2, 23, 26, 38, 11, 5, 20, 29, 35, 14, 22, 27, 37, 12, 13, 36, 28, 8, 17, 19, 30, 34, 15, 21, 4, 32]
+```
+
+What if I wanted to find a solution for 100 numbers? Backtracking is awesome for 16, but for 100 numbers it would take forever. Let's find another solution.
+
+```typescript
+// app/api/posts/route.ts
+import { NextRequest } from 'next/server';
+
+export async function GET(request: NextRequest) {
+  const posts = await fetchPosts();
+  return Response.json(posts);
+}
+
+export async function POST(request: NextRequest) {
+  const body = await request.json();
+  const newPost = await createPost(body);
+  return Response.json(newPost, { status: 201 });
+}
+```
+
+## Parámetros dinámicos en la URL
+
+Para rutas como `/api/posts/123`, usas carpetas con corchetes:
+
+```typescript
+// app/api/posts/[id]/route.ts
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id } = await params;
+  const post = await getPostById(id);
+  
+  if (!post) {
+    return Response.json(
+      { error: "Post not found" },
+      { status: 404 }
+    );
+  }
+  
+  return Response.json(post);
+}
+```
+
+## Validación con Zod
+
+Para validar los datos de entrada, uso Zod:
+
+```bash
+npm install zod
+```
+
+Luego creo schemas reutilizables:
+
+```typescript
+import { z } from 'zod';
+
+const PostSchema = z.object({
+  title: z.string().min(1).max(100),
+  content: z.string().min(10),
+  tags: z.array(z.string()).optional(),
+});
+
+export async function POST(request: NextRequest) {
+  const body = await request.json();
+  
+  // Validar
+  const result = PostSchema.safeParse(body);
+  if (!result.success) {
+    return Response.json(
+      { error: result.error.issues },
+      { status: 400 }
+    );
+  }
+  
+  // Crear post con datos validados
+  const newPost = await createPost(result.data);
+  return Response.json(newPost, { status: 201 });
+}
+```
+
+![Arquitectura API](https://placehold.co/800x400/1a1a1a/white?text=Next.js+API+Architecture)
+
+## Manejo de errores
+
+Siempre envuelvo la lógica en try-catch:
+
+```typescript
+export async function GET() {
+  try {
+    const data = await fetchData();
+    return Response.json(data);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return Response.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}
+```
+
+## Middleware y autenticación
+
+Para proteger rutas, puedes agregar lógica de auth:
+
+```typescript
+import { cookies } from 'next/headers';
+
+export async function GET(request: NextRequest) {
+  const token = (await cookies()).get('auth-token');
+  
+  if (!token) {
+    return Response.json(
+      { error: "Unauthorized" },
+      { status: 401 }
+    );
+  }
+  
+  // Verificar token...
+  const user = await verifyToken(token.value);
+  
+  return Response.json({ user });
+}
+```
+
+## Próximos pasos
+
+Ahora que tengo las bases, quiero explorar:
+
+- **Rate limiting** para prevenir abuso
+- **Caching** con Redis o KV stores
+- **Webhooks** para eventos externos
+- **GraphQL** como alternativa a REST
+
+## Recursos útiles
+
+- [Next.js Route Handlers Docs](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
+- [Zod Documentation](https://zod.dev/)
+- [HTTP Status Codes Reference](https://httpstatuses.com/)
+
+---
+
+¿Qué te pareció? Si tienes preguntas o sugerencias, escríbeme en [Twitter](https://twitter.com/tuusuario).

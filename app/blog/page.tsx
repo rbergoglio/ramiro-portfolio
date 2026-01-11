@@ -1,25 +1,28 @@
-import { Section } from "@/components/Section";
-import { BlogCard, BlogCardProps } from "@/components/BlogCard";
+import { getAllPosts } from '@/lib/posts';
+import { BlogCard } from '@/components/BlogCard';
 
-const blogEntries: BlogCardProps[] = [
-  {
-    title: "The squared-sum problem",
-    description: "Solving the squared-sum problem using Python.",
-    tech: ["Python"],
-    date: "2026-01-01",
-    href: "/blog/first-post",
-    img: "/images/blog1.png",
-  }
-];
+export default function BlogPage() {
+  const posts = getAllPosts();
 
-export default function Blog() {
   return (
-    <Section title="Blog" subtitle="Who I am">
-      <div className="mt-8 mx-40">
-        <BlogCard blog={blogEntries[0]}></BlogCard>
-        <BlogCard blog={blogEntries[0]}></BlogCard>
-        <BlogCard blog={blogEntries[0]}></BlogCard>
+    <div className="container mx-auto py-12">
+      <h1 className="text-4xl font-bold mb-8">Blog</h1>
+      
+      <div className="grid gap-6">
+        {posts.map(post => (
+          <BlogCard 
+            key={post.slug}
+            blog={{
+              title: post.title,
+              description: post.description,
+              href: `/blog/${post.slug}`,
+              tags: post.tags,
+              date: post.date,
+              img: post.img
+            }}
+          />
+        ))}
       </div>
-    </Section>
+    </div>
   );
 }
