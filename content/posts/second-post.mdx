@@ -8,7 +8,7 @@ img: "/images/nextjs-api.jpg"
 
 # The squared sum problem
 
-I finally finished collage. Now I want to be a nerd! The first thing I did was buy a book called "Things to Make and Do in the Fourth Dimension" and on one chapter
+I bought a book called "Things to Make and Do in the Fourth Dimension" and on one chapter
 one thing they talked about was the squared sum problem. It's a classic problem that goes like this:
 
 Arrange the numbers 1 to 16 so that the sum of the squares of any two adjacent numbers is a perfect square.
@@ -36,7 +36,7 @@ I actually started first with pen and paper. My first thought was that the highe
 I tried a few combinations but I quickly realized that this was going to be tedious. And what I was doing was similar to backtracking, so I decided to write a program to do it for me.
 I know it's not the best solution, but my goal was to find one solution first without AI or help and then optimize it later or find a better one.
 
-## Let's backtrack
+## Backtracking
 
 So what I was doing with pen and paper was basically backtracking. In backtracking, the algorithm tries something and if it fails it goes back to the previous step and tries something else.
 It's a brute force approach.
@@ -89,7 +89,7 @@ def findSquaredList(squaredList: list[int], sixteenNumbers: list[int]) -> list[i
     else:
         for index, item in enumerate(sixteenNumbers):
             newlist= squaredList + [item]
-            if(is_squared_list(squaredList)):
+            if(is_squared_list(newList)):
                 newSixteenNumbers = sixteenNumbers[:index] + sixteenNumbers[index+1:]
                 result = findSquaredList(newlist, newSixteenNumbers)
                 if result is not None:
@@ -103,7 +103,9 @@ print(findSquaredList([],sixteenNumbers))
 
 And Ta daaaa I got the only possible solution:
 
+```
 [8, 1, 15, 10, 6, 3, 13, 12, 4, 5, 11, 14, 2, 7, 9, 16]
+```
 
 Backtracking is known to have a really bad algorithm complexity. Let's analyze it and look for better solutions. Now with google and AI allowed :D
 
@@ -113,155 +115,43 @@ This problem proposes to find a solution for the numbers of 1 - 16 but there it'
 
 Let's do a little experiment. I'll add a decorator to my function to measure the time and then I'll see how long it takes each time.
 
-16 numbers: 0.02 seconds
-25 numbers: 0.10 seconds
-30 numbers: 1.2 seconds
-35 numbers: 2,4 seconds
-40 numbers: 31 seconds
+* 16 numbers: 0.02 seconds
+* 25 numbers: 0.10 seconds
+* 30 numbers: 1.2 seconds
+* 35 numbers: 2,4 seconds
+* 40 numbers: 31 seconds
 
+This happens because the algorithm time complexity of my solution is of O(n!) (n! in the worst case)
+Since my algorithm tries all cases it's trying:
+- n choices
+- n-1 choices
+- ...
+- n! choices in total
+
+Here's the solution for 40 numbers if you're curious:
 ```
 [1, 3, 6, 10, 39, 25, 24, 40, 9, 16, 33, 31, 18, 7, 2, 23, 26, 38, 11, 5, 20, 29, 35, 14, 22, 27, 37, 12, 13, 36, 28, 8, 17, 19, 30, 34, 15, 21, 4, 32]
 ```
 
 What if I wanted to find a solution for 100 numbers? Backtracking is awesome for 16, but for 100 numbers it would take forever. Let's find another solution.
+This time I'll use google the solution.
 
-```typescript
-// app/api/posts/route.ts
-import { NextRequest } from 'next/server';
 
-export async function GET(request: NextRequest) {
-  const posts = await fetchPosts();
-  return Response.json(posts);
-}
+## Finding the solution through the Hamiltonian path of a graph
 
-export async function POST(request: NextRequest) {
-  const body = await request.json();
-  const newPost = await createPost(body);
-  return Response.json(newPost, { status: 201 });
-}
-```
+So I googled the problem and I found this video. Turns out the guy who made the video is also the author of the book I'm reading.
 
-## Parámetros dinámicos en la URL
+img with link to video https://www.youtube.com/watch?v=G1m7goLCJDY
 
-Para rutas como `/api/posts/123`, usas carpetas con corchetes:
+The solution is to create a graph where each neighour node is a possible adyacent pair. Once you place all the numbers you have to find
+the path in the graph that vists every single node exactly once. To solve this I'll need an implementation of a graph in python and a function
+to find the Hamiltonian path of that graph. I would also like to see the graph visually, maybe using a library.
 
-```typescript
-// app/api/posts/[id]/route.ts
-export async function GET(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
-  const { id } = await params;
-  const post = await getPostById(id);
-  
-  if (!post) {
-    return Response.json(
-      { error: "Post not found" },
-      { status: 404 }
-    );
-  }
-  
-  return Response.json(post);
-}
-```
+picture of graph with Hamiltonian path selected
 
-## Validación con Zod
+Building the graph is easy, but how do we find the Hamiltonian path in a way more performant than my backtracking solution?
 
-Para validar los datos de entrada, uso Zod:
+From what I found googling, recursion is the only way but using Depth-First Search (DFS) algorithm is much better than my permutation solution.
+Let's try it and see if we can find the solution for 100 numbers.
 
-```bash
-npm install zod
-```
-
-Luego creo schemas reutilizables:
-
-```typescript
-import { z } from 'zod';
-
-const PostSchema = z.object({
-  title: z.string().min(1).max(100),
-  content: z.string().min(10),
-  tags: z.array(z.string()).optional(),
-});
-
-export async function POST(request: NextRequest) {
-  const body = await request.json();
-  
-  // Validar
-  const result = PostSchema.safeParse(body);
-  if (!result.success) {
-    return Response.json(
-      { error: result.error.issues },
-      { status: 400 }
-    );
-  }
-  
-  // Crear post con datos validados
-  const newPost = await createPost(result.data);
-  return Response.json(newPost, { status: 201 });
-}
-```
-
-![Arquitectura API](https://placehold.co/800x400/1a1a1a/white?text=Next.js+API+Architecture)
-
-## Manejo de errores
-
-Siempre envuelvo la lógica en try-catch:
-
-```typescript
-export async function GET() {
-  try {
-    const data = await fetchData();
-    return Response.json(data);
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    return Response.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
-  }
-}
-```
-
-## Middleware y autenticación
-
-Para proteger rutas, puedes agregar lógica de auth:
-
-```typescript
-import { cookies } from 'next/headers';
-
-export async function GET(request: NextRequest) {
-  const token = (await cookies()).get('auth-token');
-  
-  if (!token) {
-    return Response.json(
-      { error: "Unauthorized" },
-      { status: 401 }
-    );
-  }
-  
-  // Verificar token...
-  const user = await verifyToken(token.value);
-  
-  return Response.json({ user });
-}
-```
-
-## Próximos pasos
-
-Ahora que tengo las bases, quiero explorar:
-
-- **Rate limiting** para prevenir abuso
-- **Caching** con Redis o KV stores
-- **Webhooks** para eventos externos
-- **GraphQL** como alternativa a REST
-
-## Recursos útiles
-
-- [Next.js Route Handlers Docs](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
-- [Zod Documentation](https://zod.dev/)
-- [HTTP Status Codes Reference](https://httpstatuses.com/)
-
----
-
-¿Qué te pareció? Si tienes preguntas o sugerencias, escríbeme en [Twitter](https://twitter.com/tuusuario).
+## DFS Hamiltonian path
