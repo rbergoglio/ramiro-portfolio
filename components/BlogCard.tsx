@@ -12,7 +12,7 @@ export type BlogCardProps = {
 export function BlogCard({ blog }: { blog: BlogCardProps }) {
   return (
     <Link href={blog.href}>
-        <article className="border-b border-zinc-200 p-6 transition-colors hover:border-zinc-300 dark:border-zinc-800 dark:hover:border-zinc-700">
+        <article className="border-b border-zinc-200 p-6 transition-colors hover:border-zinc-300 dark:border-zinc-800 dark:hover:border-zinc-700 mx-48">
             <div className="grid grid-cols-4">
                 <div className="col-span-4 md:col-span-3">
                     <h3 className="text-lg font-semibold tracking-tight">{blog.title}</h3>
